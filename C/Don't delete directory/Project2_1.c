@@ -55,20 +55,19 @@ void print_student_list(const STUDENT *s, STUDENT *s_sort, int size) {
 void find_student(const STUDENT *s, int size, char *name) {
     int isNotHere = 1;
 
-    if (strcmp(name, "exit") == 0)
-        return 0;
+    if (strcmp(name, "exit") != 0) {
+        for (int i = 0; i < size; i++) {
+            if (strcmp((s + i)->name, name) == 0 || strcmp((s + i)->class_name, name) == 0) {
+                printf("%3d번: ", i + 1);
+                print_student(s + i);
 
-    for (int i = 0; i < size; i++) {
-        if (strcmp((s + i)->name, name) == 0 || strcmp((s + i)->class_name, name) == 0) {
-            printf("%3d번: ", i + 1);
-            print_student(s + i);
-
-            isNotHere = 0;
+                isNotHere = 0;
+            }
         }
-    }
 
-    if (isNotHere == 1)
-        printf("해당 학생 정보를 찾을 수 없습니다.");
+        if (isNotHere == 1)
+            printf("해당 학생 정보를 찾을 수 없습니다.");
+    }
 }
 
 /* print_presentation_list 함수 구현 */
@@ -77,14 +76,10 @@ void find_student(const STUDENT *s, int size, char *name) {
 // 학생 번호: printf("%3d번: ",변수); 이용하여 출력
 // 학생 정보: print_student 함수 이용하여 출력
 /* -------------------------- */
-void pritn_presentation_list (const STUDENT *s) {
+void print_presentation_list (const STUDENT *s) {
     printf("<< 발표리스트 >>\n");
-    printf("%3d번: ",변수);
-
+    printf("%3d번: ", 1);
 }
-
-
-
 
 int main(void)
 {
@@ -114,10 +109,13 @@ int main(void)
     
     /* Put your answer */
     STUDENT student_sort[sizeof(s_list) / sizeof(STUDENT)];
+    STUDENT student_presentation[sizeof(s_list) / sizeof(STUDENT)];
+
     char name[BUF_SIZE];
+    int number = 0;
 
     // #1 - 1
-    print_student_list(s_list, student_sort,sizeof(s_list) / sizeof(STUDENT));
+    print_student_list(s_list, student_sort, sizeof(s_list) / sizeof(STUDENT));
 
     // #1 - 2
     do {
@@ -128,6 +126,33 @@ int main(void)
 
 
     // #1 - 3
+    print_student_list(s_list, student_sort, sizeof(s_list) / sizeof(STUDENT));
+
+    do {
+        int student_number = 0;
+
+        printf("\n발표리스트에 추가하려면 1번, 삭제하려면 2번, 종료하려면 3번을 누르세요: ");
+        scanf("%d", &number);
+
+        if (number == 1) {
+            printf("발표리스트에 추가할 학생 번호를 입력하세요: ");
+            scanf("%d", &student_number);
+
+            if ()
+
+            print_presentation_list(student_presentation);
+        }
+
+        else if (number == 2) {
+            printf("발표리스트에서 삭제할 학생 번호를 입력하세요: ");
+            scanf("%d", &student_number);
+
+            print_presentation_list(student_presentation);
+        }
+
+
+
+    } while(number != 3 || sizeof());
 
 
     return 0;
