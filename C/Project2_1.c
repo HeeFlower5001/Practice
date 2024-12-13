@@ -195,14 +195,14 @@ int main(void)
             int isEmpty = 1;
 
             STUDENT student_presentation = s_list_presentation[student_number - 1];
-
+            // 0 1 2 3 4
             for (int i = 0; i < s_list_presentation_size; i++) {
                 if (strcmp(student_presentation.ID, s_list_presentation[i].ID) == 0) {
                     for (int j = i; j < s_list_presentation_size; j++) {
                         s_list_presentation[j] = s_list_presentation[j + 1];
                     }
 
-                    
+
                     s_list_presentation_size--;
                     isEmpty = 0;
 
