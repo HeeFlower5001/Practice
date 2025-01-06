@@ -6,10 +6,13 @@
     "presentation": {
         "reveal": "always"
     },
+
     "tasks": [
+        
+        // C 
         {
-            "label": "save and compile for C++",
-            "command": "g++",
+            "label": "C 컴파일",
+            "command": "gcc",
             "args": [
                 "${file}",
                 "-o",
@@ -31,10 +34,12 @@
                 }
             }
         },
-        
+
+            
+        // C++
         {
-            "label": "save and compile for C",
-            "command": "gcc",
+            "label": "C++ 컴파일",
+            "command": "g++",
             "args": [
                 "${file}",
                 "-o",
@@ -67,100 +72,19 @@
             ]
         },
 
+        // Java 컴파일
         {
-            "type": "cppbuild",
-            "label": "C/C++: gcc.exe 활성 파일 빌드",
-            "command": "C:\\MinGW\\bin\\gcc.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-            "detail": "디버거에서 생성된 작업입니다."
-        },
-
-        {
-            "type": "cppbuild",
-            "label": "C/C++: g++.exe 활성 파일 빌드",
-            "command": "C:\\MinGW\\bin\\g++.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-//            "group": {
-//               "kind": "build",
-//                "isDefault": true
-//            },
-            
-            "detail": "디버거에서 생성된 작업입니다."
-        },
-
-        {
-            "type": "cppbuild",
-            "label": "C/C++: gcc.exe 활성 파일 빌드",
-            "command": "C:\\MinGW\\bin\\gcc.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-              
-            // "group": {
-            //     "kind": "build",
-            //     "isDefault": true
-            // },
-
-            "detail": "컴파일러: C:\\MinGW\\bin\\gcc.exe"
-        },
-
-        {
-            "label": "save and compile for Java",
+            "label": "Java 컴파일",
             "command": "javac",
             "args": [
                 "${file}"
             ],
-            "group": "build",
-            "problemMatcher": {
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*\\.java):(\\d+):\\s*(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "message": 3
-                }
-            }
+            "group": "build"
         },
 
+        // Java 실행
         {
-            "label": "execute",
+            "label": "Java 실행",
             "command": "java",
             "group": "test",
             "args": [
@@ -168,20 +92,6 @@
                 "${fileDirname}",
                 "${fileBasenameNoExtension}"
             ]
-        },
-        
-        {
-            "type": "shell",
-            "label": "Java: Compile and Run",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "save and compile for Java",
-                "execute"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
         }
     ]
 }
