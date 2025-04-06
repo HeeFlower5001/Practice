@@ -1,9 +1,10 @@
 from socket import *
 
 # 서버 이름과 서버 포트 입력
-# 자신의 서버 주소 -> localhost or '127.0.0.1'
+# 자신의 서버 주소 -> 'localhost' or '127.0.0.1'
+# 서버 IP '125.183.197.235'
 
-serverName = 'localhost'
+serverName = '125.183.197.235'
 serverPort = 12000
 
 # 소켓 생성과 메시지 입력 
