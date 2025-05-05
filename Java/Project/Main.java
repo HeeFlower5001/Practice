@@ -17,14 +17,14 @@ public class Main {
             }
         }
 
-        // 0행, 0열 채우기
+        // 0행 채우기
         dp[0][0] = coin[0][0];
 
         for (int i1 = 1; i1 < n; i1++) {
             dp[i1][0] = dp[i1 - 1][0] + coin[i1][0];
         }
 
-
+        // 0열 채우기
         for (int i2 = 1; i2 < m; i2++) {
             dp[0][i2] = dp[0][i2 - 1] + coin[0][i2];
         }
