@@ -7,39 +7,39 @@ public class Main {
         int n = sc.nextInt();
         int m = sc.nextInt();
 
-        int[][] coin = new int[n][m];
-        int[][] dp = new int[n][m];
+        boolean[][] list = new boolean[n + 1][n + 1];
 
-        // coin 입력 받기
-        for (int i1 = 0; i1 < n; i1++) {
-            for (int i2 = 0; i2 < m; i2++) {
-                coin[i1][i2] = sc.nextInt();
-            }
+        int x_first = Integer.MAX_VALUE;
+        int x_last = Integer.MIN_VALUE;
+
+        int y_first = Integer.MAX_VALUE;
+        int y_last = Integer.MIN_VALUE;
+
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            list[n - y][x] = true;
+            if (x < x_first) x_first = x;
+            if (x > x_last) x_last = x;
+            if (y < y_first) y_first = y;
+            if (y > y_last) y_last = y;
         }
 
-        // 0행 채우기
-        dp[0][0] = coin[0][0];
+        int answer = 0;
 
-        for (int i1 = 1; i1 < n; i1++) {
-            dp[i1][0] = dp[i1 - 1][0] + coin[i1][0];
+        for (int i = 0; i < n + 1; i++) {
+            if (list[i][x_first]) answer++;
+            if (list[i][x_last]) answer++;
+            if (list[n - y_first][i]) answer++;
+            if (list[n - y_last][i]) answer++;
         }
 
-        // 0열 채우기
-        for (int i2 = 1; i2 < m; i2++) {
-            dp[0][i2] = dp[0][i2 - 1] + coin[0][i2];
-        }
+        if (list[n - y_first][x_first]) answer--;
+        if (list[n - y_first][x_last]) answer--;
+        if (list[n - y_last][x_first]) answer--;
+        if (list[n - y_last][x_last]) answer--;
 
-        // 1행 ~ (n - 1)행 채우기
-        for (int i1 = 1; i1 < n; i1++) {
-            for (int i2 = 1; i2 < m; i2++) {
-                // 3가지 비교
-                int value1 = Math.min(dp[i1 - 1][i2], dp[i1][i2 - 1]);
-                int value2 = Math.min (value1, dp[i1 - 1][i2 - 1]);
-
-                dp[i1][i2] = value2 + coin[i1][i2];
-            }
-        }
-
-        System.out.print(dp[n - 1][m - 1]);
+        System.out.printf("%d %d", answer, m - answer);
     }
 }
