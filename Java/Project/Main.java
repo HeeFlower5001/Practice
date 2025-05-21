@@ -1,45 +1,73 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+    static class Point implements Comparable<Point> {
+        int x, y;
+
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public int compareTo(Point o) {
+            if (this.x != o.x) return Integer.compare(this.x, o.x);
+            return Integer.compare(this.y, o.y);
+        }
+    }
+
+    static long cross(Point o, Point a, Point b) {
+        return (long)(a.x - o.x) * (b.y - o.y) - (long)(a.y - o.y) * (b.x - o.x);
+    }
+
+    static List<Point> convexHull(Point[] points) {
+        Arrays.sort(points);
+        int n = points.length;
+        List<Point> hull = new ArrayList<>();
+
+        // Lower hull
+        for (int i = 0; i < n; i++) {
+            while (hull.size() >= 2 &&
+                   cross(hull.get(hull.size() - 2), hull.get(hull.size() - 1), points[i]) <= 0) {
+                hull.remove(hull.size() - 1);
+            }
+            hull.add(points[i]);
+        }
+
+        // Upper hull
+        int lowerSize = hull.size();
+        for (int i = n - 2; i >= 0; i--) {
+            while (hull.size() > lowerSize &&
+                   cross(hull.get(hull.size() - 2), hull.get(hull.size() - 1), points[i]) <= 0) {
+                hull.remove(hull.size() - 1);
+            }
+            hull.add(points[i]);
+        }
+
+        if (hull.size() > 1) hull.remove(hull.size() - 1);
+
+        return hull;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+        int n = sc.nextInt(); 
+        int m = sc.nextInt(); 
 
-        boolean[][] list = new boolean[n + 1][n + 1];
-
-        int x_first = Integer.MAX_VALUE;
-        int x_last = Integer.MIN_VALUE;
-
-        int y_first = Integer.MAX_VALUE;
-        int y_last = Integer.MIN_VALUE;
+        Point[] prisoners = new Point[m];
 
         for (int i = 0; i < m; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
-
-            list[n - y][x] = true;
-            if (x < x_first) x_first = x;
-            if (x > x_last) x_last = x;
-            if (y < y_first) y_first = y;
-            if (y > y_last) y_last = y;
+            prisoners[i] = new Point(x, y);
         }
 
-        int answer = 0;
+        List<Point> hull = convexHull(prisoners);
 
-        for (int i = 0; i < n + 1; i++) {
-            if (list[i][x_first]) answer++;
-            if (list[i][x_last]) answer++;
-            if (list[n - y_first][i]) answer++;
-            if (list[n - y_last][i]) answer++;
-        }
+        int watch = hull.size();
+        int noWatch = m - watch;
 
-        if (list[n - y_first][x_first]) answer--;
-        if (list[n - y_first][x_last]) answer--;
-        if (list[n - y_last][x_first]) answer--;
-        if (list[n - y_last][x_last]) answer--;
-
-        System.out.printf("%d %d", answer, m - answer);
+        System.out.printf("%d %d\n", watch, noWatch);
     }
 }

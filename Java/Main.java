@@ -5,6 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+<<<<<<< HEAD
 
         int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
@@ -38,3 +39,15 @@ public class Main {
 
 
 
+=======
+        int k = sc.nextInt();
+
+        boolean[] home = new boolean[n];
+        for (int i = 0; i < n; i++) home[sc.nextInt()] = true;
+
+        
+
+        System.out.print(answer);
+    }
+}
+>>>>>>> c90db09115e9127ca7aaafb0847b0b94ca8aa60a
